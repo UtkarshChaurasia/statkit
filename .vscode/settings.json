@@ -1,0 +1,8 @@
+{
+    "editor.fontSize": 16,
+    "files.autoSave": "afterDelay",
+    "python.analysis.cachingLevel": "Library",
+    "python.analysis.diagnosticPublishDelay": 10000,
+    "merge-conflict.autoNavigateNextConflict.enabled": true,
+    "git.autofetch": true
+}
