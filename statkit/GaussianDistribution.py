@@ -1,4 +1,5 @@
 import math
+import matplotlib.pyplot as plt
 from .GeneralDistribution import Distribution
 
 class Gaussian(Distribution):
@@ -60,3 +61,76 @@ class Gaussian(Distribution):
         self.stdev = sigma
 
         return self.stdev
+
+
+
+    def plot_histogram(self):
+
+        """ Function to output a histogram of the instance variable data using
+            matplotlib pyplot library.
+
+            Args:
+                None
+
+            Returns:
+                None
+
+        """
+        plt.hist(self.data)
+        plt.title('Histogram of Data')
+        plt.xlabel('data')
+        plt.ylabel('count')
+
+
+
+    def pdf(self, x):
+
+        """ Probability density function calculator for the gaussian distribution
+
+            Args:
+                x (float): point for calculating the probability density function
+
+            Returns:
+                float: probability density function output
+
+        """
+
+        return (1.0 / (self.stdev * math.sqrt(2 * math.pi))) * math.exp(-0.5*((x - self.mean) / self.stdev) ** 2)
+
+
+
+    def plot_histogram_pdf(self, n_spaces = 50):
+
+        """ Functiom to plot the normalized histogram of the data and a plot of the
+            probability density function along the same range
+
+            Args:
+                n_spaces (int): number of data points
+
+            Returns:
+                list: x values for the pdf plot
+                list: y values for the pdf plot
+
+        """
+        mu = self.mean
+        sigma = self.stdev
+
+        min_range = min(self.data)
+        max_range = max(self.data)
+
+        # calculates the interval between x values
+        interval = 1.0 * (max_range - min_range) / n_spaces
+
+        x = []
+        y = []
+
+        # calculates the x values to visualize
+        for i in range(n_spaces):
+            tmp = min_range + interval*i
+            x.append(tmp)
+            y.append(self.pdf(tmp))
+
+        # make the plots
+        fig, axes = plt.subplots(2, sharex=True)
+
+
